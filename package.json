@@ -1,0 +1,8 @@
+{
+  "name": "student-task-manager-web-application",
+  "version": "1.0.0",
+  "description": "Student Task Manager Web Application",
+  "scripts": {
+    "build": "mkdir -p dist && cp index.html script.js style.css dist/"
+  }
+}
