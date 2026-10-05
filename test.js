@@ -1,10 +1,10 @@
 const fs = require('fs');
 
-const files = ['index.html','script.js','style.css'];
+const files = ['index.html', 'script.js', 'style.css'];
 
-files.array.forEach(file => {
-    if(! fs.existsSync(file)){
-        throw new Error('${file} is missing');
+files.forEach(file => {
+    if (!fs.existsSync(file)) {
+        throw new Error(`${file} is missing`);
     }
 });
 
