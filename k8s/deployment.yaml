@@ -3,7 +3,11 @@ kind: Deployment
 metadata:
   name: task-manager-deployment
 spec:
-  replicas: 2
+  # One replica: tasks are stored in a JSON file, so several pods would each
+  # keep their own separate copy of the data.
+  replicas: 1
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app: task-manager
@@ -18,3 +22,10 @@ spec:
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80
+          volumeMounts:
+            - name: data
+              mountPath: /app/data
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: task-manager-data

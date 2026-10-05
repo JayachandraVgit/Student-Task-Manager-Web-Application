@@ -1,9 +1,11 @@
 {
   "name": "student-task-manager-web-application",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Student Task Manager Web Application",
+  "main": "server.js",
+  "engines": { "node": ">=18" },
   "scripts": {
     "build": "mkdir -p dist && cp index.html script.js style.css dist/",
-    "test":"node test.js"
+    "test" : "node test.js"
   }
 }

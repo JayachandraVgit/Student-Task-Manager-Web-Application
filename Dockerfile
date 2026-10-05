@@ -1,9 +1,15 @@
-FROM nginx:alpine
+FROM node:22-alpine
 
-COPY index.html /usr/share/nginx/html/
-COPY script.js /usr/share/nginx/html/
-COPY style.css /usr/share/nginx/html/
+WORKDIR /app
 
-EXPOSE 3000
+COPY package.json server.js index.html script.js style.css ./
+COPY js ./js
 
-CMD ["nginx", "-g", "daemon off;"]
+# Tasks are stored in /app/data/tasks.json - mount a volume here to keep them.
+RUN mkdir -p /app/data
+VOLUME /app/data
+
+ENV PORT=80 HOST=0.0.0.0 DATA_FILE=/app/data/tasks.json
+EXPOSE 80
+
+CMD ["node", "server.js"]

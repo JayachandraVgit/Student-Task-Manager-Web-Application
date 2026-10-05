@@ -1,32 +1,258 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Task Manager System</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f7f8f5">
+  <title>Student Task Manager</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'%3E%3Crect width='28' height='28' rx='7' fill='%23426b56'/%3E%3Cpath d='M8 10h12M8 14h12M8 18h7' stroke='%23fff' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-    <div class="container">
+  <!-- Icon sprite (referenced with <use href="#i-name">) -->
+  <svg class="sprite" width="0" height="0" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+      <symbol id="i-checks" viewBox="0 0 24 24"><path d="m2 12 5 5L18 6"/><path d="m13 16 1 1L22 8"/></symbol>
+      <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+      <symbol id="i-edit" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></symbol>
+      <symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="m19 6-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/></symbol>
+      <symbol id="i-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+      <symbol id="i-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+      <symbol id="i-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+      <symbol id="i-close" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+      <symbol id="i-reset" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></symbol>
+      <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5Z"/></symbol>
+      <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></symbol>
+      <symbol id="i-deep" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></symbol>
+      <symbol id="i-shallow" viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7Z"/></symbol>
+      <symbol id="i-list" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></symbol>
+      <symbol id="i-hourglass" viewBox="0 0 24 24"><path d="M6 2h12v5l-4 5 4 5v5H6v-5l4-5-4-5Z"/></symbol>
+      <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
+    </defs>
+  </svg>
 
-        <h1>Student Task Manager</h1>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="./" aria-label="Student Task Manager home">
+        <svg class="logo" viewBox="0 0 28 28" aria-hidden="true"><rect width="28" height="28" rx="7" fill="currentColor"/><path d="M8 10h12M8 14h12M8 18h7" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+        <span class="brand-name">Student Task Manager</span>
+      </a>
+      <span class="avatar" id="avatar" aria-hidden="true">J</span>
+    </div>
+  </header>
 
-        <div class="task-input">
-            <input type="text" id="taskInput" placeholder="Enter a task">
-            <button onclick="addTask()">Add Task</button>
+  <main class="page">
+
+    <section class="hero" aria-labelledby="greeting">
+      <div class="hero-text">
+        <div class="day-nav">
+          <button type="button" class="icon-btn" id="prevDay" aria-label="Previous day"><svg class="i"><use href="#i-left"/></svg></button>
+          <span class="day-label" id="dateLabel"></span>
+          <button type="button" class="icon-btn" id="nextDay" aria-label="Next day"><svg class="i"><use href="#i-right"/></svg></button>
+          <button type="button" class="btn-text" id="todayBtn" hidden>Back to today</button>
         </div>
+        <h1 id="greeting">Hello!</h1>
+        <p class="sub" id="subline"></p>
+      </div>
+      <button type="button" class="btn btn-primary" id="addTaskBtn">
+        <svg class="i"><use href="#i-plus"/></svg><span>Add task</span>
+      </button>
+    </section>
 
-        <h2>My Tasks</h2>
-        
-        <p id="taskCount">Total Tasks: 0</p>
+    <section class="summary" aria-label="Summary">
+      <article class="stat">
+        <div class="stat-top"><p class="stat-label">Pending</p><span class="stat-icon"><svg class="i"><use href="#i-list"/></svg></span></div>
+        <p class="stat-value" id="statPending">0</p>
+        <p class="stat-sub" id="statPendingSub"></p>
+      </article>
+      <article class="stat">
+        <div class="stat-top"><p class="stat-label">Remaining</p><span class="stat-icon"><svg class="i"><use href="#i-hourglass"/></svg></span></div>
+        <p class="stat-value" id="statRemaining">0</p>
+        <p class="stat-sub" id="statRemainingSub"></p>
+      </article>
+      <article class="stat">
+        <div class="stat-top"><p class="stat-label">Deep work</p><span class="stat-icon stat-icon-deep"><svg class="i"><use href="#i-deep"/></svg></span></div>
+        <p class="stat-value" id="statDeep">0</p>
+        <p class="stat-sub" id="statDeepSub"></p>
+      </article>
+      <article class="stat">
+        <div class="stat-top"><p class="stat-label">Shallow work</p><span class="stat-icon stat-icon-shallow"><svg class="i"><use href="#i-shallow"/></svg></span></div>
+        <p class="stat-value" id="statShallow">0</p>
+        <p class="stat-sub" id="statShallowSub"></p>
+      </article>
+    </section>
 
-        <ul id="taskList"></ul>
+    <section class="progress" aria-label="Daily progress">
+      <span class="progress-icon"><svg class="i"><use href="#i-checks"/></svg></span>
+      <div class="progress-text">
+        <p class="progress-title">Daily progress</p>
+        <p class="progress-sub" id="progressSub">0 of 0 tasks completed</p>
+      </div>
+      <div class="track" id="progressTrack" role="progressbar" aria-label="Daily progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+        <div class="fill" id="progressFill"></div>
+      </div>
+      <p class="progress-percent" id="progressPercent">0%</p>
+      <p class="progress-message" id="progressMessage"></p>
+    </section>
 
+    <div class="layout">
+
+      <section class="tasks" aria-labelledby="tasksHeading">
+        <div class="section-head">
+          <h2 id="tasksHeading">Your tasks</h2>
+          <span class="muted" id="openCount"></span>
+        </div>
+        <div class="filters" role="group" aria-label="Filter tasks" id="filters">
+          <button type="button" class="chip" data-filter="all" aria-pressed="true">All <span class="count">0</span></button>
+          <button type="button" class="chip" data-filter="deep" aria-pressed="false">Deep work <span class="count">0</span></button>
+          <button type="button" class="chip" data-filter="shallow" aria-pressed="false">Shallow work <span class="count">0</span></button>
+          <button type="button" class="chip" data-filter="pending" aria-pressed="false">Pending <span class="count">0</span></button>
+          <button type="button" class="chip" data-filter="completed" aria-pressed="false">Completed <span class="count">0</span></button>
+        </div>
+        <div class="task-scroll" id="taskList" aria-live="polite"></div>
+      </section>
+
+      <aside class="side" aria-label="Timer and schedule">
+
+        <section class="card pomodoro" id="pomodoro" data-open="false" data-mode="focus" aria-label="Pomodoro timer">
+          <button type="button" class="pomo-head" id="pomoToggle" aria-expanded="false" aria-controls="pomoBody">
+            <span class="pomo-title">Pomodoro</span>
+            <span class="pomo-mini">
+              <span class="pomo-mini-time" id="pomoMiniTime">25:00</span>
+              <span class="pill" id="pomoMiniMode">Focus</span>
+            </span>
+            <svg class="i chevron"><use href="#i-down"/></svg>
+          </button>
+          <div class="pomo-body" id="pomoBody" hidden>
+            <div class="pomo-tabs" role="group" aria-label="Timer mode">
+              <button type="button" data-mode="focus" aria-pressed="true">Focus</button>
+              <button type="button" data-mode="short" aria-pressed="false">Short break</button>
+              <button type="button" data-mode="long" aria-pressed="false">Long break</button>
+            </div>
+            <p class="pomo-time" id="pomoTime" role="timer">25:00</p>
+            <p class="pomo-status" id="pomoStatus">Time for a fresh start</p>
+            <div class="pomo-controls">
+              <button type="button" class="btn btn-primary" id="pomoStart"><svg class="i"><use href="#i-play"/></svg><span>Start</span></button>
+              <button type="button" class="icon-btn icon-btn-lg" id="pomoReset" aria-label="Reset timer"><svg class="i"><use href="#i-reset"/></svg></button>
+            </div>
+            <label class="pomo-task">
+              <span>Working on</span>
+              <select id="pomoTask"></select>
+            </label>
+            <div class="pomo-session">
+              <span class="dots" id="pomoDots" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+              <span id="pomoSession">Focus 1 of 4</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="card timeline" aria-labelledby="timelineHeading">
+          <div class="section-head">
+            <h2 id="timelineHeading">Today</h2>
+            <span class="muted" id="timelineCount"></span>
+          </div>
+          <p class="timeline-date" id="timelineDate"></p>
+          <div id="timelineBody"></div>
+        </section>
+
+      </aside>
     </div>
 
-    <script src="script.js"></script>
+    <p class="footer-note">A little structure. A little more breathing room.</p>
+  </main>
+
+  <!-- Add / edit task -->
+  <dialog id="taskDialog" aria-labelledby="dialogTitle">
+    <form id="taskForm" novalidate>
+      <div class="dialog-head">
+        <div>
+          <h2 id="dialogTitle">Add task</h2>
+          <p class="muted" id="dialogSub">Create a new task and choose its focus.</p>
+        </div>
+        <button type="button" class="icon-btn" id="dialogClose" aria-label="Close"><svg class="i"><use href="#i-close"/></svg></button>
+      </div>
+
+      <div class="dialog-body">
+        <div class="field">
+          <label for="fTitle">Task name</label>
+          <input id="fTitle" name="title" type="text" maxlength="120" autocomplete="off" placeholder="e.g. Finish calculus problem set" aria-describedby="eTitle">
+          <p class="error" id="eTitle" role="alert"></p>
+        </div>
+
+        <div class="field">
+          <label for="fDescription">Description <span class="optional">optional</span></label>
+          <textarea id="fDescription" name="description" rows="2" maxlength="500" placeholder="Add context, reminders or next steps" aria-describedby="eDescription"></textarea>
+          <p class="error" id="eDescription" role="alert"></p>
+        </div>
+
+        <fieldset class="field">
+          <legend>Task type</legend>
+          <div class="choices two">
+            <label class="choice">
+              <input type="radio" name="type" value="deep" checked>
+              <span class="choice-body"><svg class="i"><use href="#i-deep"/></svg><span><strong>Deep work</strong><small>Focused, sustained effort</small></span></span>
+            </label>
+            <label class="choice">
+              <input type="radio" name="type" value="shallow">
+              <span class="choice-body"><svg class="i"><use href="#i-shallow"/></svg><span><strong>Shallow work</strong><small>Quick, around 15 min or less</small></span></span>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset class="field">
+          <legend>Priority</legend>
+          <div class="choices three">
+            <label class="choice"><input type="radio" name="priority" value="high"><span class="choice-body center">High</span></label>
+            <label class="choice"><input type="radio" name="priority" value="medium" checked><span class="choice-body center">Medium</span></label>
+            <label class="choice"><input type="radio" name="priority" value="low"><span class="choice-body center">Low</span></label>
+          </div>
+        </fieldset>
+
+        <div class="field">
+          <label for="fDuration">Estimated duration (minutes)</label>
+          <input id="fDuration" name="duration" type="number" inputmode="numeric" min="1" max="600" step="1" value="45" aria-describedby="eDuration durationHint">
+          <div class="presets" id="durationPresets">
+            <button type="button" data-minutes="10">10</button>
+            <button type="button" data-minutes="25">25</button>
+            <button type="button" data-minutes="45">45</button>
+            <button type="button" data-minutes="60">60</button>
+            <button type="button" data-minutes="90">90</button>
+          </div>
+          <p class="hint" id="durationHint"></p>
+          <p class="error" id="eDuration" role="alert"></p>
+        </div>
+
+        <div class="row-2">
+          <div class="field">
+            <label for="fTime">Scheduled time <span class="optional">optional</span></label>
+            <input id="fTime" name="time" type="time" aria-describedby="eTime">
+            <p class="error" id="eTime" role="alert"></p>
+          </div>
+          <div class="field">
+            <label for="fDate">Date</label>
+            <input id="fDate" name="date" type="date" aria-describedby="eDate">
+            <p class="error" id="eDate" role="alert"></p>
+          </div>
+        </div>
+
+        <p class="error form-error" id="formError" role="alert"></p>
+      </div>
+
+      <div class="dialog-foot">
+        <button type="button" class="btn btn-ghost" id="dialogCancel">Cancel</button>
+        <button type="submit" class="btn btn-primary" id="dialogSave">Save task</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="toasts" id="toasts" role="status" aria-live="polite"></div>
+
+  <script type="module" src="script.js"></script>
 </body>
 </html>
-

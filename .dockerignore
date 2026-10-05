@@ -4,3 +4,7 @@ node_modules
 npm-debug.log
 Dockerfile
 .dockerignore
+data
+dist
+test
+k8s
