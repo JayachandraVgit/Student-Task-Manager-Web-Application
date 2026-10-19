@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: task-manager-assignment7
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: task-manager-assignment7
+  template:
+    metadata:
+      labels:
+        app: task-manager-assignment7
+    spec:
+      containers:
+        - name: task-manager
+          image: task-manager-assignment7:1.0
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: task-manager-assignment7
+spec:
+  selector:
+    app: task-manager-assignment7
+  ports:
+    - port: 3000
+      targetPort: 3000
+  type: ClusterIP

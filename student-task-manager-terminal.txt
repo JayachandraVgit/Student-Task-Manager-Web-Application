@@ -1,0 +1,48 @@
+Script started on 2026-09-28 11:45:37+05:30 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="152" LINES="37"]
+[?2004h]0;administrator@administrator-OptiPlex-5060: ~/Student-Task-Manager-Web-Application[01;32madministrator@administrator-OptiPlex-5060[00m:[01;34m~/Student-Task-Manager-Web-Application[00m$ [K]0;administrator@administrator-OptiPlex-5060: ~/Student-Task-Manager-Web-Application[01;32madministrator@administrator-OptiPlex-5060[00m:[01;34m~/Student-Task-Manager-Web-Application[00m$ [K]0;administrator@administrator-OptiPlex-5060: ~/Student-Task-Manager-Web-Application[01;32madministrator@administrator-OptiPlex-5060[00m:[01;34m~/Student-Task-Manager-Web-Application[00m$ docker ps
+[?2004lCONTAINER ID   IMAGE                                 COMMAND                  CREATED             STATUS             PORTS                                                                                                                                  NAMES
+47b724b46590   task-manager:1.0                      "/docker-entrypoint.…"   About an hour ago   Up About an hour   3000/tcp, 0.0.0.0:3000->80/tcp, [::]:3000->80/tcp                                                                                      task-manager-container
+71fda98c8fb8   gcr.io/k8s-minikube/kicbase:v0.0.51   "/usr/local/bin/entr…"   5 days ago          Up About an hour   127.0.0.1:32768->22/tcp, 127.0.0.1:32769->2376/tcp, 127.0.0.1:32770->5000/tcp, 127.0.0.1:32771->8443/tcp, 127.0.0.1:32772->32443/tcp   minikube
+[?2004h]0;administrator@administrator-OptiPlex-5060: ~/Student-Task-Manager-Web-Application[01;32madministrator@administrator-OptiPlex-5060[00m:[01;34m~/Student-Task-Manager-Web-Application[00m$ [7mdocker stop task-manager-cont[27m[7ma[27m[7miner[27m[A]0;administrator@administrator-OptiPlex-5060: ~/Student-Task-Manager-Web-Application[01;32madministrator@administrator-OptiPlex-5060[00m:[01;34m~/Student-Task-Manager-Web-Application[00m$ docker stop task-manager-container
+[?2004ltask-manager-container
+[?2004h]0;administrator@administrator-OptiPlex-5060: ~/Student-Task-Manager-Web-Application[01;32madministrator@administrator-OptiPlex-5060[00m:[01;34m~/Student-Task-Manager-Web-Application[00m$ [7mdocker stop $(docker ps -q)[27mdocker stop $(docker ps -q)
+[?2004l71fda98c8fb8
+[?2004h]0;administrator@administrator-OptiPlex-5060: ~/Student-Task-Manager-Web-Application[01;32madministrator@administrator-OptiPlex-5060[00m:[01;34m~/Student-Task-Manager-Web-Application[00m$ [7msudo systemctl stop jenkins[27msudo systemctl stop jenkins
+[?2004l[sudo] password for administrator: 
+[?2004h]0;administrator@administrator-OptiPlex-5060: ~/Student-Task-Manager-Web-Application[01;32madministrator@administrator-OptiPlex-5060[00m:[01;34m~/Student-Task-Manager-Web-Application[00m$ [7msudo systemctl status jenkins[27m [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Csudo systemctl status jenkins [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ks
+[?2004l[?1h=○ jenkins.service - Jenkins Continuous Integration Server[m
+     Loaded: loaded (]8;;file://administrator-OptiPlex-5060/usr/lib/systemd/system/jenkins.service/usr/lib/systemd/system/jenkins.service]8;;; [0;1;32menabled[0m; preset: [0;1;32menabled[0m)[m
+     Active: inactive (dead) since Mon 2026-09-28 11:56:54 IST; 7s ago[m
+   Duration: 1h 28min 43.968s[m
+    Process: 6969 ExecStart=/usr/bin/jenkins [0;1;31m(code=exited, status=143)[0m[m
+   Main PID: 6969 (code=exited, status=143)[m
+     Status: "[0;1;36mJenkins stopped[0m"[m
+        CPU: 47.700s[m
+[m
+Sep 28 11:56:54 administrator-OptiPlex-5060 jenkins[6969]: 2026-09-28 06:26:54.021+0000 [id=38]        INFO   [m[7m>[27m
+Sep 28 11:56:54 administrator-OptiPlex-5060 jenkins[6969]: 2026-09-28 06:26:54.021+0000 [id=38]        INFO   [m[7m>[27m
+Sep 28 11:56:54 administrator-OptiPlex-5060 jenkins[6969]: 2026-09-28 06:26:54.050+0000 [id=38]        INFO   [m[7m>[27m
+Sep 28 11:56:54 administrator-OptiPlex-5060 jenkins[6969]: 2026-09-28 06:26:54.080+0000 [id=38]        INFO   [m[7m>[27m
+Sep 28 11:56:54 administrator-OptiPlex-5060 jenkins[6969]: 2026-09-28 06:26:54.196+0000 [id=38]        INFO   [m[7m>[27m
+Sep 28 11:56:54 administrator-OptiPlex-5060 jenkins[6969]: 2026-09-28 06:26:54.196+0000 [id=38]        INFO   [m[7m>[27m
+Sep 28 11:56:54 administrator-OptiPlex-5060 jenkins[6969]: 2026-09-28 06:26:54.336+0000 [id=38]        INFO   [m[7m>[27m
+Sep 28 11:56:54 administrator-OptiPlex-5060 systemd[1]: jenkins.service: Deactivated successfully.[m
+Sep 28 11:56:54 administrator-OptiPlex-5060 systemd[1]: Stopped jenkins.service - Jenkins Continuous Integrati[m[7m>[27m
+Sep 28 11:56:54 administrator-OptiPlex-5060 systemd[1]: jenkins.service: Consumed 47.700s CPU time, 375.3M mem[m[7m>[27m
+[7mlines 1-19/19 (END)[27m[K
+[?2004h]0;administrator@administrator-OptiPlex-5060: ~/Student-Task-Manager-Web-Application[01;32madministrator@administrator-OptiPlex-5060[00m:[01;34m~/Student-Task-Manager-Web-Application[00m$ [7mminikube stop[27mminikube stop
+[?2004l✋  Stopping node "minikube"  ...
+🛑  1 node stopped.
+[?2004h]0;administrator@administrator-OptiPlex-5060: ~/Student-Task-Manager-Web-Application[01;32madministrator@administrator-OptiPlex-5060[00m:[01;34m~/Student-Task-Manager-Web-Application[00m$ [7mminikube status[27mminikube status
+[?2004lminikube
+type: Control Plane
+host: Stopped
+kubelet: Stopped
+apiserver: Stopped
+kubeconfig: Stopped
+
+[?2004h]0;administrator@administrator-OptiPlex-5060: ~/Student-Task-Manager-Web-Application[01;32madministrator@administrator-OptiPlex-5060[00m:[01;34m~/Student-Task-Manager-Web-Application[00m$ cd ..
+[?2004l[?2004h]0;administrator@administrator-OptiPlex-5060: ~[01;32madministrator@administrator-OptiPlex-5060[00m:[01;34m~[00m$ exo[Kit
+[?2004lexit
+
+Script done on 2026-09-28 11:57:33+05:30 [COMMAND_EXIT_CODE="0"]

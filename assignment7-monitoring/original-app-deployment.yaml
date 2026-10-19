@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: student-task-manager-monitored
+  labels:
+    app: student-task-manager-monitored
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: student-task-manager-monitored
+  template:
+    metadata:
+      labels:
+        app: student-task-manager-monitored
+    spec:
+      containers:
+        - name: student-task-manager
+          image: student-task-manager-original:assignment7-monitoring
+          imagePullPolicy: Never
+          ports:
+            - name: http
+              containerPort: 80
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 3
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: student-task-manager-monitored
+  labels:
+    app: student-task-manager-monitored
+spec:
+  type: ClusterIP
+  selector:
+    app: student-task-manager-monitored
+  ports:
+    - name: http
+      port: 80
+      targetPort: http

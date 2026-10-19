@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus-assignment7
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prometheus-assignment7
+  template:
+    metadata:
+      labels:
+        app: prometheus-assignment7
+    spec:
+      containers:
+        - name: prometheus
+          image: prom/prometheus:latest
+          imagePullPolicy: IfNotPresent
+          args:
+            - --config.file=/etc/prometheus/prometheus.yml
+            - --storage.tsdb.path=/prometheus
+          ports:
+            - containerPort: 9090
+          volumeMounts:
+            - name: config
+              mountPath: /etc/prometheus
+      volumes:
+        - name: config
+          configMap:
+            name: prometheus-assignment7-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: prometheus-assignment7
+spec:
+  type: NodePort
+  selector:
+    app: prometheus-assignment7
+  ports:
+    - port: 9090
+      targetPort: 9090
+      nodePort: 31520

@@ -1,0 +1,17 @@
+global:
+  scrape_interval: 5s
+
+scrape_configs:
+  - job_name: 'prometheus-assignment7'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - job_name: 'task-manager-assignment7'
+    metrics_path: /metrics
+    static_configs:
+      - targets: ['task-manager-assignment7:3000']
+
+  - job_name: 'original-student-task-manager'
+    metrics_path: /metrics
+    static_configs:
+      - targets: ['student-task-manager-exporter:9113']
